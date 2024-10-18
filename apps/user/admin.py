@@ -10,11 +10,11 @@ from .auth import models as auth_models
 class UserAdmin(admin.ModelAdmin):
     """User admin"""
 
-    list_display = ("id", "username", "first_name", "last_name", "email", "created_in", "is_active", "is_staff")
-    list_display_links = ("id", "username", "first_name", "last_name")
-    fields = ("username", "first_name", "last_name", "email", "is_active", "is_staff","hashed_password")
+    list_display = ("id", "username", "first_name", "last_name", "role", "email", "created_in", "is_active", "is_staff")
+    list_display_links = ("id", "username", "first_name", "last_name", "role")
+    fields = ("username", "first_name", "last_name", "role", "email", "is_active", "is_staff","hashed_password")
     search_fields = ("username", "first_name", "last_name")
-    list_filter = ("is_active", "is_staff")
+    list_filter = ("is_active", "is_staff", "role")
     list_max_show_all = 250
     list_per_page = 150
     actions = ["activate_user", "deactivate_user", "grant_access_to_admin_site", "deny_access_to_admin_site"]

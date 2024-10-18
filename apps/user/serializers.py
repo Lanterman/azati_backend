@@ -53,7 +53,7 @@ class MyProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ["id", "username", "first_name", "last_name", "email", "created_in"]
+        fields = ["id", "username", "first_name", "last_name", "role", "email", "created_in"]
 
 
 class EnemyProfileSerializer(serializers.ModelSerializer):
@@ -61,7 +61,7 @@ class EnemyProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ["username", "first_name", "last_name", "email", "created_in"]
+        fields = ["username", "first_name", "last_name", "role", "email", "created_in"]
 
 
 class UpdateUserInfoSerializer(serializers.ModelSerializer, ValidateClass):
@@ -69,7 +69,7 @@ class UpdateUserInfoSerializer(serializers.ModelSerializer, ValidateClass):
 
     class Meta:
         model = models.User
-        fields = ["first_name", "last_name", "email"]
+        fields = ["first_name", "last_name", "email", "role"]
     
     def validate_first_name(self, value: str) -> str:
         value = value.strip()
@@ -132,7 +132,7 @@ class SignUpSerializer(serializers.ModelSerializer, ValidateClass):
 
     class Meta:
         model = models.User
-        fields = ["username", "first_name", "last_name", "email", "password1", "password2"]
+        fields = ["username", "first_name", "last_name", "role", "email", "password1", "password2"]
     
     def validate_username(self, value: str) -> str:
         value = value.strip()

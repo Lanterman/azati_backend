@@ -12,9 +12,17 @@ AbstractUser._meta.get_field('username').help_text = _(
         )
 
 
+class RoleChoice(models.TextChoices):
+    """Choose ROLE"""
+
+    CANDIDATE = "CANDIDATE"
+    RECRUITER = "RECRUITER"
+
+
 class User(AbstractUser):
     """User model"""
 
+    role: str = models.CharField("role", max_length=30, default=RoleChoice.CANDIDATE,  choices=RoleChoice.choices)
     created_in: datetime.datetime = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(_('email address'), blank=False, help_text="Required.", unique=True, 
                               error_messages={"unique": _("A user with that email already exists.")})
