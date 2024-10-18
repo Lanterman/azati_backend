@@ -90,12 +90,12 @@ class TestLogoutFunction(APITestCase):
 
     def test_existing_user_id(self):
         count_instances = auth_models.JWTToken.objects.count()
-        assert 3 == count_instances, count_instances
+        assert 6 == count_instances, count_instances
 
         response = db_queries.logout(self.instance)
         count_instances = auth_models.JWTToken.objects.count()
         self.assertIsNone(response, response)
-        assert 2 == count_instances, count_instances
+        assert 5 == count_instances, count_instances
 
 
 class TestGetSecretKeyFunction(APITestCase):
@@ -112,7 +112,7 @@ class TestGetSecretKeyFunction(APITestCase):
         response = db_queries.get_secret_key(1)
         assert self.user.id == response.user.id, response
 
-        response_1 = db_queries.get_secret_key(5)
+        response_1 = db_queries.get_secret_key(10)
         self.assertIsNone(response_1)
 
 
@@ -130,7 +130,7 @@ class TestCreateUserSecretKeyFunction(APITestCase):
         secret_key = "f065868f2ef8d3e623b3ec36b0596dc09ee61273ac0d6677fd9ba279a68a75e8"
         count_instance = auth_models.SecretKey.objects.count()
         assert secret_key == self.instance.key, self.instance.key
-        assert 3 == count_instance, count_instance
+        assert 6 == count_instance, count_instance
 
         new_secret_key = "qwr23j918u3jiuwniqj312jqioqoj131313qwe"
         response = db_queries.create_user_secret_key(new_secret_key, 2)
@@ -138,7 +138,7 @@ class TestCreateUserSecretKeyFunction(APITestCase):
         self.instance.refresh_from_db()
         self.assertIsNone(response, response)
         assert new_secret_key == self.instance.key, self.instance.key
-        assert 3 == count_instance, count_instance
+        assert 6 == count_instance, count_instance
 
     
     def test_create_instance(self):
@@ -152,7 +152,7 @@ class TestCreateUserSecretKeyFunction(APITestCase):
         self.assertIsNone(response, response)
         secret_key = auth_models.SecretKey.objects.filter(user__id=1).exists()
         self.assertTrue(secret_key,secret_key)
-        assert 3 == count_instance, count_instance
+        assert 6 == count_instance, count_instance
 
 
 class TestGetJWTTokenInstanceByUserIdFunction(APITestCase):
@@ -210,7 +210,7 @@ class TestCreateJWTTokenFunction(APITestCase):
 
     def test_update_instance(self):
         count_instance = auth_models.JWTToken.objects.count()
-        assert 3 == count_instance, count_instance
+        assert 6 == count_instance, count_instance
 
         response = db_queries.create_jwttoken("access_token", "refresh_token", 3)
         count_instance = auth_models.JWTToken.objects.count()
@@ -218,7 +218,7 @@ class TestCreateJWTTokenFunction(APITestCase):
         self.assertIsNotNone(response, response)
         assert self.instance == response, response
         assert "access_token" == response.access_token, response.access_token
-        assert 3 == count_instance, count_instance
+        assert 6 == count_instance, count_instance
 
     
     def test_create_instance(self):
@@ -233,4 +233,4 @@ class TestCreateJWTTokenFunction(APITestCase):
         self.assertIsNotNone(response, response)
         self.assertTrue(secret_key,secret_key)
         assert "access_token" == response.access_token, response.access_token
-        assert 3 == count_instance, count_instance
+        assert 6 == count_instance, count_instance

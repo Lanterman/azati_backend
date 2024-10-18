@@ -4,6 +4,15 @@ from django.contrib import admin
 
 from . import models
 from .auth import models as auth_models
+from apps.main.models import CandidateSkill
+
+
+class CandidateSkillInlince(admin.TabularInline):
+    """Options for inline editing of CandidateSkill `model` instances."""
+
+    model = CandidateSkill
+    extra = 4
+    max_num = 4
 
 
 @admin.register(models.User)
@@ -17,6 +26,7 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ("is_active", "is_staff", "role")
     list_max_show_all = 250
     list_per_page = 150
+    inlines = [CandidateSkillInlince]
     actions = ["activate_user", "deactivate_user", "grant_access_to_admin_site", "deny_access_to_admin_site"]
 
     @admin.action(description="Activate user(-s)")

@@ -70,6 +70,7 @@ class TestJWTTokenAuthBackend(APITestCase):
         assert tuple == type(resposne_5), resposne_5
         assert 2 == len(resposne_5), resposne_5
         assert "lanterman" == resposne_5[0].username, resposne_5[0]
+        assert "CANDIDATE" == resposne_5[0].role, resposne_5[0]
         assert "JWTToken" == resposne_5[1].__class__.__name__, resposne_5[1].__class__.__name__
         assert self.token.access_token == resposne_5[1].access_token, resposne_5[1].access_token
 
@@ -83,7 +84,8 @@ class TestJWTTokenAuthBackend(APITestCase):
         response_2 = self.instance.authenticate_credentials(self.token_to_db.access_token)
         assert tuple == type(response_2), response_2
         assert 2 == len(response_2), response_2
-        assert "string" == response_2[0].username, response_2[0]
+        assert "recruiter" == response_2[0].username, response_2[0]
+        assert "RECRUITER" == response_2[0].role, response_2[0]
         assert "JWTToken" == response_2[1].__class__.__name__, response_2[1].__class__.__name__
         assert self.token_to_db.access_token == response_2[1].access_token, response_2[1].access_token
 
