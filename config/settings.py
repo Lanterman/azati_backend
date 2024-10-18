@@ -37,6 +37,9 @@ DEBUG = bool(os.getenv("DOC_DEBUG", os.environ["DEBUG"]))
 
 ALLOWED_HOSTS = json.loads(os.getenv("DOC_ALLOWED_HOSTS", os.environ["ALLOWED_HOSTS"]))
 
+CORS_ALLOWED_ORIGINS = json.loads(os.getenv("DOC_CORS_ALLOWED_ORIGINS", os.environ["CORS_ALLOWED_ORIGINS"]))
+# CORS_ORIGIN_ALLOW_ALL = bool(os.getenv("DOC_CORS_ORIGIN_ALLOW_ALL", os.environ["CORS_ORIGIN_ALLOW_ALL"]))
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'corsheaders',
     'debug_toolbar',
 
     # OpenAPI
@@ -67,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

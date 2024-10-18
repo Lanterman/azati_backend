@@ -136,7 +136,7 @@ class RefreshTokenView(generics.CreateAPIView):
 
 @method_decorator(name="put", decorator=swagger_auto_schema(tags=["profile"]))
 class ResetPasswordView(generics.UpdateAPIView):
-    """Cahnge a user account password endpoint"""
+    """Reset a user account password endpoint"""
 
     queryset = models.User.objects.all()
     permission_classes = []
