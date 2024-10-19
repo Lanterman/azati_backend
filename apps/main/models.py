@@ -46,7 +46,7 @@ class CandidateSkill(models.Model):
         verbose_name_plural = _("CandidateSkills")
 
     def __str__(self):
-        return f"{self.skill_name} - {self.years_of_experience} years_of_experience"
+        return f"{self.skill_name} - {self.years_of_experience} years of experience"
 
 
 class RecruiterSkill(models.Model):

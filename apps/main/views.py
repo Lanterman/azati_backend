@@ -58,7 +58,7 @@ class CreateRecruiterSkillView(generics.CreateAPIView):
             raise exceptions.NotFound(detail="This vacancy doesn't exists!", code=status.HTTP_404_NOT_FOUND)
 
         if vacancy[0].owner_id != request.user:
-            raise exceptions.APIException(detail="You don't have access!", code=status.HTTP_403_FORBIDDEN)
+            raise exceptions.PermissionDenied(detail="You don't have access!", code=status.HTTP_403_FORBIDDEN)
         
         return super().create(request, *args, **kwargs)
     
@@ -99,5 +99,5 @@ class CandidateView(generics.RetrieveAPIView):
 
     queryset = User.objects.all().prefetch_related("skills")
     serializer_class = serializers.CandidateSerializer
-    permission_classes = [IsAuthenticated, permissions.IsCandidate]
+    permission_classes = [IsAuthenticated]
     lookup_field = "username"
