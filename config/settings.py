@@ -170,8 +170,6 @@ AUTH_USER_MODEL = "user.User"
 # REST framework settings
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 15,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # Custom auth by JWTToken
         'apps.user.auth.backends.JWTTokenAuthBackend',

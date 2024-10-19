@@ -37,6 +37,9 @@ class CreateRecruiterSkillSerializer(serializers.ModelSerializer):
         model = models.RecruiterSkill
         fields = ["skill_name", "min_level", "min_years_of_experience"]
     
+    def validate_skill_name(self, value: str) -> str:
+        return value.capitalize()
+    
     def validate_min_years_of_experience(self, value: int) -> int:
         return value if 0 < value < 100 else 0
 
@@ -47,6 +50,9 @@ class CreateCandidateSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CandidateSkill
         fields = ["skill_name", "level", "years_of_experience", "last_used_year"]
+    
+    def validate_skill_name(self, value: str) -> str:
+        return value.capitalize()
     
     def validate_years_of_experience(self, value: int) -> int:
         return value if 0 < value < 100 else 0
