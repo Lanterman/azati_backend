@@ -7,9 +7,21 @@ from apps.user.models import User
 
 
 @pytest.mark.parametrize("test_input, output", [
-    ({"user_1": 1, "user_2": 2, "user_3": 3 , "user_4": 4}, ["user_4", "user_3", "user_2", "user_1"]), 
-    ({"user_1": 3, "user_2": 1, "user_3": 10, "user_4": 5}, ["user_3", "user_4", "user_1", "user_2"]), 
-    ({"user_1": 99, "user_2": 80, "user_3": 70, "user_4": 5}, ["user_1", "user_2", "user_3", "user_4"])
+    ([("user_1", 1), ("user_2", 2), ("user_3", 3), ("user_4", 4)], [("user_4", 4), ("user_3", 3), ("user_2", 2), ("user_1", 1)]), 
+    ([("user_1", 3), ("user_2", 1), ("user_3", 10), ("user_4", 5)], [("user_3", 10), ("user_4", 5), ("user_1", 3), ("user_2", 1)]), 
+    ([("user_1", 99), ("user_2", 80), ("user_3", 70), ("user_4", 5)], [("user_1", 99), ("user_2", 80), ("user_3", 70), ("user_4", 5)])
+])
+def get_sorted_list_quick_sort(test_input: int | None, output: int):
+    """Testing the get_sorted_list_quick_sort function"""
+
+    response = services.get_sorted_list(test_input)
+    assert output == response, response
+
+
+@pytest.mark.parametrize("test_input, output", [
+    ({"user_1": 1, "user_2": 2, "user_3": 3 , "user_4": 4}, [("user_4", 4), ("user_3", 3), ("user_2", 2), ("user_1", 1)]), 
+    ({"user_1": 3, "user_2": 1, "user_3": 10, "user_4": 5}, [("user_3", 10), ("user_4", 5), ("user_1", 3), ("user_2", 1)]), 
+    ({"user_1": 99, "user_2": 80, "user_3": 70, "user_4": 5}, [("user_1", 99), ("user_2", 80), ("user_3", 70), ("user_4", 5)])
 ])
 def test_get_sorted_list(test_input: int | None, output: int):
     """Testing the get_sorted_list function"""

@@ -5,11 +5,25 @@ from apps.user.models import User
 DICT_LEVEL = {"BEGINNER": 1, "INTERMEDIATE": 2, "ADVANCED": 3}
 
 
+def get_sorted_list_quick_sort(list_assessment: dict) -> list:
+    """Get a sorted list by quick sort algorithm"""
+
+    if len(list_assessment) <= 1:
+        return list_assessment
+    
+    pivot = list_assessment[len(list_assessment) // 2]
+
+    left = [item for item in list_assessment if item[1] < pivot[1]]
+    middle = [item for item in list_assessment if item[1] == pivot[1]]
+    right = [item for item in list_assessment if item[1] > pivot[1]]
+
+    return get_sorted_list_quick_sort(right) + middle + get_sorted_list_quick_sort(left)
+
+
 def get_sorted_list(dict_assessment: dict) -> list:
     """Get a sorted list from a dictionary. Sort by dictionary values."""
 
-    sorted_list = sorted(dict_assessment.items(), key=lambda x: x[1], reverse=True)
-    return list(item[0] for item in sorted_list)
+    return sorted(dict_assessment.items(), key=lambda x: x[1], reverse=True)
 
 
 def get_list_of_sorted_vacancies(user: User) -> list:
@@ -23,7 +37,13 @@ def get_list_of_sorted_vacancies(user: User) -> list:
     for skill in relevant_skills:
         dict_assessment[skill.vacancy_id] += DICT_LEVEL[skill.min_level] + skill.min_years_of_experience
     
-    return get_sorted_list(dict_assessment)
+    ## sort by lambda function
+    # sorted_list = get_sorted_list(dict_assessment)
+    
+    ## quick sort algorithm
+    sorted_list = get_sorted_list_quick_sort([(key, value) for key, value in dict_assessment.items()])
+
+    return list(item[0] for item in sorted_list)
 
 
 def get_list_of_sorted_candidates(vacancy_id: int) -> list:
@@ -38,4 +58,10 @@ def get_list_of_sorted_candidates(vacancy_id: int) -> list:
     for skill in relevant_skills:
         dict_assessment[skill.user_id] += DICT_LEVEL[skill.level] + skill.years_of_experience
 
-    return get_sorted_list(dict_assessment)
+    ## sort by lambda function
+    # sorted_list = get_sorted_list(dict_assessment)
+    
+    ## quick sort algorithm
+    sorted_list = get_sorted_list_quick_sort([(key, value) for key, value in dict_assessment.items()])
+    
+    return list(item[0] for item in sorted_list)
