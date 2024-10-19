@@ -1,6 +1,7 @@
 # Azati - test
+Added a quick sort algorithm to sort current candidates and vacancies.
 
-The project is 98% covered by tests.
+The project is 99% covered by tests.
 
 ### Launch of the project
 
@@ -8,9 +9,9 @@ The project is 98% covered by tests.
 ```
 git clone https://github.com/Lanterman/azati_backend.git
 ```
-#### 2) Go to the 'indors_backend' directory
+#### 2) Go to the 'azati_backend' directory
 ```
-cd indors_backend
+cd azati_backend
 ```
 #### 2) Create and run docker-compose
 ```
@@ -33,3 +34,7 @@ docker exec -it <backend_container_ID> python manage.py createsuperuser
    
 P.S.
 Before resetting "auth/reset_password/{email}/{secret_key}/" password, you must request it from "/auth/profile/try_to_reset_password/" endpoint.
+
+P.S.S.
+Test data is also loaded into the project. 
+If you don't want to add them, remove line 24 in 'docker-compose.yaml' ('python manage.py loaddata ./config/test/test_data.json &&').

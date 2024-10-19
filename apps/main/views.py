@@ -28,7 +28,7 @@ def get_vacancy_list(request) -> None:
 @decorators.api_view(["GET"])
 @decorators.permission_classes([IsAuthenticated, permissions.IsRecruiter])
 def create_vacancy_view(request) -> None:
-    """Create vacancy - endpoint"""
+    """Create a vacancy - endpoint"""
 
     vacancy = models.Vacancy.objects.create(owner_id_id=request.user.id)
     return HttpResponseRedirect(redirect_to=vacancy.get_absolute_url())
@@ -36,7 +36,7 @@ def create_vacancy_view(request) -> None:
 
 @method_decorator(name="get", decorator=swagger_auto_schema(tags=["vacancies"]))
 class VacancyView(generics.RetrieveAPIView):
-    """Get avacancy - endpoint"""
+    """Get a vacancy - endpoint"""
 
     queryset = models.Vacancy.objects.all().prefetch_related("min_skills")
     serializer_class = serializers.VacancySerializer

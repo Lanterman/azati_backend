@@ -18,7 +18,7 @@ schema_url_patterns = [
 
 description = f"""
 For authenticated requests, create a user and enter the resulting token along with the word '{AUTH_HEADER_TYPES}'.
-Example: '{AUTH_HEADER_TYPES} d8175af2fac77d4ee16b984769a7251775e6be48'.
+Example: '{AUTH_HEADER_TYPES} eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjozLCJ0eXBlX3Rva2VuIjoiYWNjZXNzIn0.6wic2W1-8cGqJVYbTzuLKNIdXPwjUQvNc0TjhwP5FXc'.
 
 P.S.
 Before resetting "auth/reset_password/<user_email>/<user_secret_key>/" password, you must request it from "/auth/profile/try_to_reset_password/" endpoint.
