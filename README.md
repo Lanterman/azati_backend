@@ -27,9 +27,17 @@ docker exec -it <backend_container_ID> python manage.py createsuperuser
     ```
     http://127.0.0.1:8000/swagger/
     ```
+    or
+   ```
+    http://0.0.0.0:8000/swagger/
+    ```
  - ##### to launch the drf openapi:
     ```
     http://127.0.0.1:8000/api/v1/
+    ```
+    or
+   ```
+    http://0.0.0.0:8000/api/v1/
     ```
    
 P.S.
